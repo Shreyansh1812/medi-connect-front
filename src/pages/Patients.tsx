@@ -4,6 +4,7 @@ import { getPatients } from "@/api";
 import { Card } from "@/components/ui/card";
 import { User } from "lucide-react";
 import { Patient } from "@/types/api";
+import SidebarNav from "@/components/SidebarNav";
 
 const Patients = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -16,12 +17,13 @@ const Patients = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-3xl">
+    <div className="min-h-screen flex bg-gray-50">
+      <SidebarNav />
+      <main className="flex-1 p-8">
         <h2 className="text-2xl font-bold mb-6 text-blue-700">Patients</h2>
         {loading && <div>Loading...</div>}
         {!loading && (
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {patients.map((p) => (
               <Card key={p._id} className="flex items-center gap-4 p-4">
                 <User className="text-blue-500 bg-blue-50 rounded-full w-10 h-10 p-2" />
@@ -44,7 +46,7 @@ const Patients = () => {
             {patients.length === 0 && <div className="text-gray-500">No patients found.</div>}
           </div>
         )}
-      </div>
+      </main>
     </div>
   );
 };

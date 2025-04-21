@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { getPatientHistory } from "@/api";
 import { Card } from "@/components/ui/card";
 import { PatientHistoryEntry } from "@/types/api";
+import SidebarNav from "@/components/SidebarNav";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -24,8 +25,9 @@ const PatientHistory = () => {
   }, [patientId]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-full max-w-2xl">
+    <div className="min-h-screen flex bg-gray-50">
+      <SidebarNav />
+      <main className="flex-1 p-8">
         <h2 className="text-2xl font-bold mb-6 text-blue-700">Patient History</h2>
         {loading && <div>Loading...</div>}
         {!loading && (
@@ -44,7 +46,7 @@ const PatientHistory = () => {
             {history.length === 0 && <div className="text-gray-400">No history found for this patient.</div>}
           </div>
         )}
-      </div>
+      </main>
     </div>
   );
 };
